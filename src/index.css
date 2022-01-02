@@ -1,3 +1,45 @@
+@import '~antd/dist/antd.css';
+
+.AppContent{
+  margin: 30px;
+  height: 85vh;
+}
+
+.site-layout-background {
+  background: #fff;
+  padding: 24px;
+  min-height: 360px;
+}
+
+[data-theme='compact'] .site-navigation-steps,
+.site-navigation-steps {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-right: 25px;
+  margin-left: 15px;
+}
+
+.home-content{
+  margin: 30px;
+  height: 85vh;
+  background-color: #fff;
+}
+
+.steps-content{
+  margin: 20px;
+  min-height: 100%;
+  height: 606px;
+  padding-left: 10px;
+}
+
+.form-row{
+  margin-top: 55px;
+}
+
+.d-none {
+    display: none !important;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
