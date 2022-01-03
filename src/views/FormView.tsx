@@ -4,6 +4,7 @@ import { Fade } from 'react-awesome-reveal';
 import FormOne from 'components/form-one';
 import FormTwo from 'components/form-two';
 import FormThree from 'components/form-three';
+import FormFour from 'components/form-four';
 
 const { Content } = Layout;
 const { Step } = Steps;
@@ -15,18 +16,18 @@ function FormView() {
     setView(current);
   }
 
-  
+
   const handleNext = () => {
-    setView((prevActiveStep:number) => prevActiveStep + 1);
+    setView((prevActiveStep: number) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setView((prevActiveStep:number) => prevActiveStep - 1);
+    setView((prevActiveStep: number) => prevActiveStep - 1);
   };
 
   const steps = [
     {
-      title: 'Usuario',
+      title: 'Datos Generales',
       content: <FormOne handleBack={handleBack} handleNext={handleNext} />
     },
     {
@@ -34,41 +35,39 @@ function FormView() {
       content: <FormTwo handleBack={handleBack} handleNext={handleNext} />
     },
     {
-      title: 'Tercero',
+      title: 'Representante legal',
       content: <FormThree handleBack={handleBack} handleNext={handleNext} />
+    },
+    {
+      title: 'Listo',
+      content: <FormFour handleBack={handleBack} handleNext={handleNext} />
     }
   ];
 
-
   return (
-    <main>
-
-      <div className="page-content">
-        <Layout>
-          <Fade triggerOnce>
-            <Content className='home-content'>
-              <Row>
-                <Col flex={2} xl={10} sm={0}>
-                  <div style={{ backgroundImage: `url('./images/background.png')`, height: '100%', width: '100%', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', borderTopLeftRadius: '9px', borderBottomLeftRadius: '9px' }} />
-                </Col>
-                <Col flex={3} xl={17} sm={24}>
-                  <Steps size="small" current={view} className="site-navigation-steps">
-                    {
-                      steps.map(item => (
-                        <Step key={item.title} title={item.title} />
-                      ))
-                    }
-                  </Steps>
-                  <div className="steps-content">
-                    {steps[view].content}
-                  </div>
-                </Col>
-              </Row>
-            </Content>
-          </Fade>
-        </Layout>
-      </div>
-    </main>
+    <Layout>
+      <Fade triggerOnce>
+        <Content className='home-content'>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col flex="450px">
+              <div style={{ backgroundImage: `url('./images/background.png')`, height: '100%', width: '100%', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', borderTopLeftRadius: '9px', borderBottomLeftRadius: '9px' }} />
+            </Col>
+            <Col flex="auto" xl={17} sm={24}>
+              <Steps size="small" current={view} className="site-navigation-steps">
+                {
+                  steps.map(item => (
+                    <Step key={item.title} title={item.title} />
+                  ))
+                }
+              </Steps>
+              <div className="steps-content">
+                {steps[view].content}
+              </div>
+            </Col>
+          </Row>
+        </Content>
+      </Fade>
+    </Layout>
   );
 }
 

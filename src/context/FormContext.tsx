@@ -1,6 +1,5 @@
 import { GlobalForm } from 'interfaces/form';
 import React, { createContext, useState } from 'react';
-// import { INITIAL_STATE } from './initial_state';
 
 type FormContextType = {
     form: GlobalForm | null,

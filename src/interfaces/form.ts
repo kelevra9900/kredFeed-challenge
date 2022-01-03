@@ -1,4 +1,5 @@
 import { Domicilio } from './domicilio';
+import { Representante_Legal } from './representante_legal';
 
 
 export interface GlobalForm {
@@ -14,4 +15,5 @@ export interface GlobalForm {
     domicilio?: Domicilio,
     telefono?: string,
     correo?: string,
+    representante_legal?: Representante_Legal
 }

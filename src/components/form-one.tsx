@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, memo, useCallback } from 'react';
 import { Input, Form, Row, Col, DatePicker, Button, Tooltip, message, Space, Select } from 'antd';
 import { Fade } from 'react-awesome-reveal';
 
@@ -6,13 +6,14 @@ import { FormContext } from 'context/FormContext';
 const { Item } = Form;
 const { Option } = Select;
 
-const FormOne = ({ handleNext, handleBack }: any) => {
+const FormOne = ({ handleNext }: any) => {
     const formContext = useContext(FormContext);
     const [regimenFiscal, setRegimeFiscal] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false);
     const rfcRegex = /^[ña-z]{3,4}[0-9]{6}[0-9a-z]{3}$/i;
 
-    function savedForm(values: any) {
+
+    const savedForm = useCallback((values) => {
         setLoading(true);
         const rfc = values.rfc;
         if (rfcRegex.test(rfc)) {
@@ -37,21 +38,25 @@ const FormOne = ({ handleNext, handleBack }: any) => {
             message.warning('Por favor ingresa un RFC válido');
             setLoading(false);
         }
-    }
+    }, [])
 
-    function onChange(value: string) {
-        setRegimeFiscal(value);
-    }
 
-    function onSearch(val: string) {
-        // console.log('search:', val);
-    }
+    const onChange = useCallback((values) => {
+        setRegimeFiscal(values);
+    },[])
+
+
+
+    const onSearch = useCallback((values) => {
+        console.info(values);
+    },[])
+
     return (
         <Form layout="vertical" autoComplete='false' onFinish={(values) => savedForm(values)} data-testid="form-one" >
             <Fade>
                 <div className='form-row'>
-                    <Row gutter={12}>
-                        <Col span={8} xs={24} sm={24} xl={8} md={8}>
+                    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                        <Col span={6} xs={24} sm={24} xl={8} md={8}>
                             <Item label="Razon social" name="razon_social" rules={[
                                 {
                                     required: true,
@@ -78,7 +83,7 @@ const FormOne = ({ handleNext, handleBack }: any) => {
                             </Item>
                         </Col>
 
-                        <Col span={8} xs={24} sm={24} xl={8} md={8}>
+                        <Col span={6} xs={24} sm={24} xl={8} md={8}>
                             <Item label="Fecha de constitución" name="fecha_constitucion" rules={[
                                 {
                                     required: true,
@@ -113,7 +118,7 @@ const FormOne = ({ handleNext, handleBack }: any) => {
                             </Item>
                         </Col>
 
-                        <Col span={8} xs={24} sm={24} xl={8} md={8}>
+                        <Col span={6} xs={24} sm={24} xl={8} md={8}>
                             <Item label="Industria" name="industria" rules={[
                                 {
                                     required: true,
@@ -122,7 +127,7 @@ const FormOne = ({ handleNext, handleBack }: any) => {
                             ]} hasFeedback>
                                 <Input placeholder="Ingresa la razón social" />
                             </Item>
-                            <Item label="Régimen fiscal" name="regimen_fiscal" rules={[
+                            <Item label="Régimen fiscal" aria-label="regimen_fiscal" aria-selected="regimen_fiscal" name="regimen_fiscal" rules={[
                                 {
                                     required: true,
                                     message: 'El régimen fiscal es obligatorio'
@@ -171,4 +176,4 @@ const FormOne = ({ handleNext, handleBack }: any) => {
     );
 }
 
-export default FormOne;
+export default memo(FormOne);
