@@ -44,7 +44,7 @@ const FormOne = ({ handleNext, handleBack }: any) => {
     }
 
     function onSearch(val: string) {
-        console.log('search:', val);
+        // console.log('search:', val);
     }
     return (
         <Form layout="vertical" autoComplete='false' onFinish={(values) => savedForm(values)} data-testid="form-one" >
