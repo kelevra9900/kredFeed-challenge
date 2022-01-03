@@ -1,10 +1,12 @@
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Input, Form, Row, Col, DatePicker, Button, Tooltip, message } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { Fade } from 'react-awesome-reveal';
+
 import { FormContext } from 'context/FormContext';
 const { Item } = Form;
 
-const FormOne = ({handleNext, handleBack}: any) => {
+const FormOne = ({ handleNext, handleBack }: any) => {
     const formContext = useContext(FormContext);
     const [loading, setLoading] = useState<boolean>(false);
     const rfcRegex = /^[ña-z]{3,4}[0-9]{6}[0-9a-z]{3}$/i;
@@ -13,8 +15,8 @@ const FormOne = ({handleNext, handleBack}: any) => {
         console.log('formulario', values);
         setLoading(true);
         const rfc = values.rfc;
-        if(rfcRegex.test(rfc)){
-            if(formContext){
+        if (rfcRegex.test(rfc)) {
+            if (formContext) {
                 formContext.setForm({
                     id: '1',
                     completed: false,
@@ -28,7 +30,7 @@ const FormOne = ({handleNext, handleBack}: any) => {
                 setLoading(false);
                 handleNext(+1);
             }
-        }else{
+        } else {
             message.warning('Por favor ingresa un RFC válido');
             setLoading(false);
         }
@@ -37,74 +39,76 @@ const FormOne = ({handleNext, handleBack}: any) => {
 
     return (
         <Form layout="vertical" autoComplete='false' onFinish={(values) => savedForm(values)}>
-            <div className='form-row'>
-                <Row gutter={12}>
-                    <Col span={8}>
-                        <Item label="Razon social" name="razon-social" rules={[
-                            {
-                                required: true,
-                                message: 'Este campo es obligatorio'
-                            }
-                        ]} hasFeedback>
-                            <Input placeholder="Ingresa la razón social" />
-                        </Item>
-                        <Item label="Nombre comercial" name="nombre-comercial" rules={[
-                            {
-                                required: true,
-                                message: 'Este campo es obligatorio'
-                            }
-                        ]} hasFeedback>
-                            <Input placeholder="Ingresa la razón social" />
-                        </Item>
-                    </Col>
-
-                    <Col span={8}>
-                        <Item label="Fecha de constitución" name="fecha-constitucion" rules={[
-                            {
-                                required: true,
-                                message: 'Este campo es obligatorio'
-                            }
-                        ]} hasFeedback>
-                            <DatePicker placeholder="Ingresa la razón social" style={{ width: '100%' }} />
-                        </Item>
-                        <Item label="RFC" name="rfc" hasFeedback
-                            rules={[
+            <Fade>
+                <div className='form-row'>
+                    <Row gutter={12}>
+                        <Col span={8}>
+                            <Item label="Razon social" name="razon_social" rules={[
                                 {
                                     required: true,
-                                    message: 'El RFC es un campo obligatorio'
+                                    message: 'Este campo es obligatorio'
                                 }
-                            ]}>
-                            <Input placeholder="Ingresa la razón social"/>
-                        </Item>
-                    </Col>
+                            ]} hasFeedback>
+                                <Input placeholder="Ingresa la razón social" />
+                            </Item>
+                            <Item label="Nombre comercial" name="nombre_comercial" rules={[
+                                {
+                                    required: true,
+                                    message: 'Este campo es obligatorio'
+                                }
+                            ]} hasFeedback>
+                                <Input placeholder="Ingresa la razón social" />
+                            </Item>
+                        </Col>
 
-                    <Col span={8}>
-                        <Item label="Industria" name="industria" rules={[
-                            {
-                                required: true,
-                                message: 'Este campo es obligatorio'
-                            }
-                        ]} hasFeedback>
-                            <Input placeholder="Ingresa la razón social" />
-                        </Item>
+                        <Col span={8}>
+                            <Item label="Fecha de constitución" name="fecha_constitucion" rules={[
+                                {
+                                    required: true,
+                                    message: 'Este campo es obligatorio'
+                                }
+                            ]} hasFeedback>
+                                <DatePicker placeholder="Ingresa la razón social" style={{ width: '100%' }} />
+                            </Item>
+                            <Item label="RFC" name="rfc" hasFeedback
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'El RFC es un campo obligatorio'
+                                    }
+                                ]}>
+                                <Input placeholder="Ingresa la razón social" />
+                            </Item>
+                        </Col>
 
-                        <Item label="Regimen Fiscal" name="regimen-fiscal" rules={[
-                            {
-                                required: true,
-                                message: 'Este campo es obligatorio'
-                            }
-                        ]} hasFeedback>
-                            <Input placeholder="Ingresa la razón social" />
-                        </Item>
-                    </Col>
+                        <Col span={8}>
+                            <Item label="Industria" name="industria" rules={[
+                                {
+                                    required: true,
+                                    message: 'Este campo es obligatorio'
+                                }
+                            ]} hasFeedback>
+                                <Input placeholder="Ingresa la razón social" />
+                            </Item>
+
+                            <Item label="Regimen Fiscal" name="regimen_fiscal" rules={[
+                                {
+                                    required: true,
+                                    message: 'Este campo es obligatorio'
+                                }
+                            ]} hasFeedback>
+                                <Input placeholder="Ingresa la razón social" />
+                            </Item>
+                        </Col>
 
 
-                    <Tooltip title="Siguiente" placement='top' arrowPointAtCenter>
-                        <Button type="primary" shape="circle" loading={loading} size='large' icon={<ArrowRightOutlined />} htmlType='submit' />
-                    </Tooltip>
+                        <Tooltip title="Siguiente" placement='top' arrowPointAtCenter>
+                            <Button type="primary" shape="circle" loading={loading} size='large' icon={<ArrowRightOutlined />} htmlType='submit' />
+                        </Tooltip>
 
-                </Row>
-            </div>
+                    </Row>
+                </div>
+            </Fade>
         </Form>
     );
 }

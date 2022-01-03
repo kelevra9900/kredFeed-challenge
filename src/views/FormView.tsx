@@ -1,8 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Layout, Row, Col, Steps } from 'antd';
 import { Fade } from 'react-awesome-reveal';
-import { FormContext } from 'context/FormContext';
-
 import FormOne from 'components/form-one';
 import FormTwo from 'components/form-two';
 import FormThree from 'components/form-three';
@@ -12,7 +10,6 @@ const { Step } = Steps;
 
 function FormView() {
   const [view, setView] = useState<number>(0);
-  const form = useContext(FormContext);
 
   const onChange = (current: number) => {
     setView(current);
