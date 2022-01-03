@@ -4,16 +4,16 @@ import { FormContext } from 'context/FormContext';
 import Lottie from "lottie-react";
 import { Fade } from 'react-awesome-reveal';
 import doneAnimation from 'lottie/done.json';
-import { Descriptions } from 'antd';
+import { Descriptions, Button } from 'antd';
 
 const { Item } = Descriptions;
 
-const FormThree = ({handleNext, handleBack}: any) => {
+const FormThree = ({ handleNext, handleBack }: any) => {
     const form = useContext(FormContext);
-    return(
-        <div style={{textAlign: 'center'}}>
+    return (
+        <div style={{ textAlign: 'center' }}>
             <Fade>
-                <Lottie animationData={doneAnimation} loop={true} style={{height: 240}}/>
+                <Lottie animationData={doneAnimation} loop={true} style={{ height: 240 }} />
                 <Descriptions title="Se ha guardado tu información" layout="horizontal">
                     <Item label="Razón social">
                         {form?.form?.razon_social}
@@ -40,6 +40,10 @@ const FormThree = ({handleNext, handleBack}: any) => {
                         {form?.form?.domicilio?.calle} - {form?.form?.domicilio?.no_interior} -{form?.form?.domicilio?.no_exterior} {form?.form?.domicilio?.cp}
                     </Item>
                 </Descriptions>
+
+                <Button size='small' type="primary" onClick={handleBack}>
+                    Atrás
+                </Button>
             </Fade>
         </div>
     );

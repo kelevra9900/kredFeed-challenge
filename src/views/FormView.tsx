@@ -49,10 +49,10 @@ function FormView() {
             <Content className='home-content'>
               <Row>
                 <Col flex={2} xl={10} sm={0}>
-                  <div style={{ backgroundImage: `url('./images/background.png')`, height: '95%', width: '100%', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', borderTopLeftRadius: '9px', borderBottomLeftRadius: '9px' }} />
+                  <div style={{ backgroundImage: `url('./images/background.png')`, height: '100%', width: '100%', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', borderTopLeftRadius: '9px', borderBottomLeftRadius: '9px' }} />
                 </Col>
                 <Col flex={3} xl={17} sm={24}>
-                  <Steps size="small" current={view} onChange={onChange} className="site-navigation-steps">
+                  <Steps size="small" current={view} className="site-navigation-steps">
                     {
                       steps.map(item => (
                         <Step key={item.title} title={item.title} />

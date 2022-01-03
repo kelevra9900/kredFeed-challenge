@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import { Input, Form, Row, Col, Button, Tooltip } from 'antd';
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { Input, Form, Row, Col, Button, Tooltip, Space } from 'antd';
+import { ArrowRightOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { Fade } from 'react-awesome-reveal';
 
 import { FormContext } from 'context/FormContext';
@@ -34,7 +34,7 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
             <Fade>
                 <div className="form-row">
                     <Row gutter={12}>
-                        <Col span={8}>
+                        <Col span={8} xs={24} xl={8}>
                             <Item label="Calle" name="calle" rules={[
                                 {
                                     required: true,
@@ -52,7 +52,7 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
                                 <Input placeholder='Colonia' />
                             </Item>
                         </Col>
-                        <Col span={8}>
+                        <Col span={8} xs={24} xl={8}>
                             <Item label="No. Interior" name="no_interior" rules={[
                                 {
                                     required: true,
@@ -70,7 +70,7 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
                                 <Input placeholder='Guadalajara' />
                             </Item>
                         </Col>
-                        <Col span={8}>
+                        <Col span={8} xs={24} xl={8}>
                             <Item label="No. Exterior" name="no_exterior" rules={[
                                 {
                                     required: true,
@@ -88,9 +88,16 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
                                 <Input placeholder='Jalisco' />
                             </Item>
                         </Col>
-                        <Tooltip title="Siguiente" placement='top' arrowPointAtCenter>
-                            <Button type="primary" shape="circle" size='large' loading={loading} icon={<ArrowRightOutlined />} htmlType='submit' />
-                        </Tooltip>
+
+                        <Space direction="horizontal" size={24}>
+                            <Tooltip title="Atrás" placement='top' arrowPointAtCenter>
+                                <Button type="link" shape="circle" size='large' loading={loading} icon={<ArrowLeftOutlined />} onClick={handleBack}>Atrás</Button>
+                            </Tooltip>
+
+                            <Tooltip title="Siguiente" placement='top' arrowPointAtCenter>
+                                <Button type="primary" size='large' loading={loading} htmlType='submit'>Siguiente</Button>
+                            </Tooltip>
+                        </Space>
                     </Row>
                 </div>
             </Fade>
