@@ -12,7 +12,6 @@ const FormOne = ({ handleNext, handleBack }: any) => {
     const rfcRegex = /^[ña-z]{3,4}[0-9]{6}[0-9a-z]{3}$/i;
 
     function savedForm(values: any) {
-        console.log('formulario', values);
         setLoading(true);
         const rfc = values.rfc;
         if (rfcRegex.test(rfc)) {
@@ -38,7 +37,7 @@ const FormOne = ({ handleNext, handleBack }: any) => {
 
 
     return (
-        <Form layout="vertical" autoComplete='false' onFinish={(values) => savedForm(values)}>
+        <Form layout="vertical" autoComplete='false' onFinish={(values) => savedForm(values)} data-testid="form-one" >
             <Fade>
                 <div className='form-row'>
                     <Row gutter={12}>
