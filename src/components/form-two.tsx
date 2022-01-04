@@ -27,13 +27,17 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
         setLoading(true);
         if (formContext) {
             formContext.setForm({
-                ...formContext.form, domicilio: {
+                ...formContext.form, 
+                domicilio: {
+                    telefono: values.telefono,
                     calle: values.calle,
                     colonia: values.colonia,
                     no_interior: values.no_interior,
                     no_exterior: values.no_exterior,
                     ciudad: values.ciudad,
-                    estado: values.estado
+                    estado: values.estado,
+                    cp: values.cp,
+                    pais: values.pais
                 }
             })
             setLoading(false);
@@ -49,7 +53,7 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
                 <div className="form-row">
                     <Row gutter={12}>
                         <Col span={8} xs={24} xl={8}>
-                            <Item label="Calle o avenida" name="calle" rules={[
+                            <Item label="Calle o Avenida" name="calle" rules={[
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
@@ -62,10 +66,16 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
+                                },
+                                {
+                                    min: 4,
+                                    max: 6,
+                                    message: 'Ingresa un código postal válido'
                                 }
                             ]} hasFeedback>
-                                <Input placeholder='Código postal' />
+                                <Input placeholder='Código postal' type={'number'} />
                             </Item>
+
                             <Item label="Entidad Federativa o Estado" name="estado" rules={[
                                 {
                                     required: true,
@@ -79,7 +89,11 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
-                                }
+                                },
+                                {
+                                    type: 'email',
+                                    message: 'Ingresa un email válido!',
+                                  },
                             ]} hasFeedback>
                                 <Input placeholder='user@gmail.com' />
                             </Item>

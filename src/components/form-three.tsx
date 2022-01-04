@@ -1,6 +1,7 @@
 import { useContext, useState, useCallback } from 'react';
 import { FormContext } from 'context/FormContext';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 import { Fade } from 'react-awesome-reveal';
 import { Input, Form, Row, Col, Button, Tooltip, Space } from 'antd';
@@ -10,10 +11,7 @@ const { Item } = Form;
 const FormThree = ({ handleBack, handleNext }: any) => {
     const formContext = useContext(FormContext);
     const [loading, setLoading] = useState<boolean>(false);
-    const [fileList, setFileList] = useState([]);
     
-    const handleChange = ({ fileList }: any) => setFileList(fileList);
-
     const handleSubmit = useCallback((values) => {
         setLoading(true);
         if (formContext) {
@@ -23,16 +21,18 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                     nombre: values.nombre,
                     genero: values.genero,
                     fecha_nacimiento: values.fecha_nacimiento,
-                    entidad_nacimiento: values.entidad_federativa,
+                    entidad_federativa_nacimiento: values.entidad_federativa,
                     pais_nacimiento: values.pais_nacimiento,
                     nacionalidad: values.nacionalidad,
                     curp: values.curp,
                     rfc: values.rfc,
                     domicilio: values.domicilio,
+                    doc_id: values.doc_id,
+                    clabe: values.clabe,
+                    banco: values.banco,
                     estado_civil: values.estado_civil,
                     correo: values.correo,
-                    telefono: values.telefono,
-                    documento_identificacion: values.documento_identificacion
+                    telefono: values.telefono
                 }
             })
             setLoading(false);
@@ -137,14 +137,6 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                             </Item>
                         </Col>
                         <Col span={8} xs={24} xl={8}>
-                            <Item label="Entidad federativa de nacimiento" name="entidad_federativa_nacimiento" rules={[
-                                {
-                                    required: true,
-                                    message: 'El campo es obligatorio'
-                                }
-                            ]} hasFeedback>
-                                <Input placeholder='Entidad federativa de nacimiento' />
-                            </Item>
                             <Item label="País de nacimiento" name="pais_nacimiento" rules={[
                                 {
                                     required: true,
@@ -187,7 +179,7 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                             </Tooltip>
 
                             <Tooltip title="Siguiente" placement='top' arrowPointAtCenter>
-                                <Button type="primary" size='large' loading={loading} htmlType='submit'>Siguiente</Button>
+                                <Button type="primary" size='large' loading={loading} htmlType='submit'>Revisa tu perfil</Button>
                             </Tooltip>
                         </Space>
                     </Row>

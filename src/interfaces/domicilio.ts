@@ -6,5 +6,6 @@ export interface Domicilio {
     colonia?: string,
     ciudad?: string,
     estado?: string,
-    pais?: string
+    pais?: string,
+    telefono: string
 }

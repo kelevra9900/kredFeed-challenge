@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Layout, Row, Col, Steps } from 'antd';
 import { Fade } from 'react-awesome-reveal';
 import FormOne from 'components/form-one';
@@ -9,13 +9,8 @@ import FormFour from 'components/form-four';
 const { Content } = Layout;
 const { Step } = Steps;
 
-function FormView() {
+const FormView: React.FunctionComponent = () => {
   const [view, setView] = useState<number>(0);
-
-  const onChange = (current: number) => {
-    setView(current);
-  }
-
 
   const handleNext = () => {
     setView((prevActiveStep: number) => prevActiveStep + 1);

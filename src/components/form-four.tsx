@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { FormContext } from 'context/FormContext';
+import { Link } from 'react-router-dom';
 
 import Lottie from "lottie-react";
 import { Fade } from 'react-awesome-reveal';
 import doneAnimation from 'lottie/done.json';
-import { Descriptions, Button } from 'antd';
+import { Descriptions, Button, Space } from 'antd';
 
 const { Item } = Descriptions;
 
@@ -41,9 +42,18 @@ const FormFour = ({ handleBack }: any) => {
                     </Item>
                 </Descriptions>
 
-                <Button size='small' type="primary" onClick={handleBack}>
-                    Atrás
-                </Button>
+
+                <Space style={{marginTop: '10px'}} size="large">
+                    <Button type="link" size="middle" onClick={handleBack}>
+                        Atrás
+                    </Button>
+
+                    <Button type="primary" size="middle">
+                        <Link to="/profile">
+                            Perfil
+                        </Link>
+                    </Button>
+                </Space>
             </Fade>
         </div>
     );

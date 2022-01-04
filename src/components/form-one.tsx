@@ -1,5 +1,5 @@
 import { useContext, useState, memo, useCallback } from 'react';
-import { Input, Form, Row, Col, DatePicker, Button, Tooltip, message, Space, Select } from 'antd';
+import { Input, Form, Row, Col, DatePicker, Button, Tooltip, message, Space, Select, Divider } from 'antd';
 import { Fade } from 'react-awesome-reveal';
 
 import { FormContext } from 'context/FormContext';
@@ -19,17 +19,14 @@ const FormOne = ({ handleNext }: any) => {
         if (rfcRegex.test(rfc)) {
             if (formContext) {
                 formContext.setForm({
-                    id: '1',
-                    completed: false,
                     razon_social: values.razon_social,
                     nombre_comercial: values.nombre_comercial,
+                    nacionalidad: values.nacionalidad,
                     fecha_constitucion: values.fecha_constitucion,
                     rfc: values.rfc,
+                    regimen_fiscal: regimenFiscal,
                     industria: values.industria,
-                    nacionalidad: values.nacionalidad,
-                    telefono: values.telefono,
                     correo: values.correo,
-                    regimen_fiscal: regimenFiscal
                 });
                 setLoading(false);
                 handleNext(+1);
@@ -101,32 +98,17 @@ const FormOne = ({ handleNext }: any) => {
                                 ]}>
                                 <Input placeholder="Ingresa la razón social" />
                             </Item>
-
-                            <Item label="Correo electrónico" name="correo" rules={[
-                                {
-                                    required: true,
-                                    message: 'Este campo es obligatorio'
-                                },
-                                {
-
-                                    type: 'email',
-                                    message: 'Ingresa un correo válido',
-
-                                }
-                            ]} hasFeedback>
-                                <Input placeholder="Ingresa la razón social" />
-                            </Item>
-                        </Col>
-
-                        <Col span={6} xs={24} sm={24} xl={8} md={8}>
                             <Item label="Industria" name="industria" rules={[
                                 {
                                     required: true,
                                     message: 'Este campo es obligatorio'
                                 }
                             ]} hasFeedback>
-                                <Input placeholder="Ingresa la razón social" />
+                                <Input placeholder="Industria" />
                             </Item>
+                        </Col>
+
+                        <Col span={6} xs={24} sm={24} xl={8} md={8}>
                             <Item label="Régimen fiscal" aria-label="regimen_fiscal" aria-selected="regimen_fiscal" name="regimen_fiscal" rules={[
                                 {
                                     required: true,
@@ -135,7 +117,7 @@ const FormOne = ({ handleNext }: any) => {
                             ]}>
                                 <Select
                                     showSearch
-                                    placeholder="Select a person"
+                                    placeholder="Selecciona un régimen fiscal"
                                     optionFilterProp="children"
                                     onChange={onChange}
                                     onSearch={onSearch}
@@ -151,17 +133,17 @@ const FormOne = ({ handleNext }: any) => {
                                 </Select>
                             </Item>
 
-                            <Item label="Teléfono" name="telefono" rules={[
+                            <Item label="Correo" name="correo" rules={[
                                 {
                                     required: true,
                                     message: 'Este campo es obligatorio'
-                                },{
-                                    min: 10,
-                                    max: 10,
-                                    message: 'El teléfono debe tener 10 dígitos'
-                                }
+                                },
+                                {
+                                    type: 'email',
+                                    message: 'Ingresa un email válido!',
+                                  },
                             ]} hasFeedback>
-                                <Input placeholder="Ingresa el número de teléfono" minLength={10} maxLength={10} />
+                                <Input placeholder="Ingresa el correo electrónico" />
                             </Item>
                         </Col>
                     </Row>
@@ -169,6 +151,7 @@ const FormOne = ({ handleNext }: any) => {
                         <Tooltip title="Siguiente" placement='top' arrowPointAtCenter>
                             <Button type="primary" size='large' loading={loading} htmlType='submit'>Siguiente</Button>
                         </Tooltip>
+
                     </Space>
                 </div>
             </Fade>
