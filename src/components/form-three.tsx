@@ -47,7 +47,6 @@ const FormThree = ({ handleBack, handleNext }: any) => {
 
     const validateCLABE = (value:string) => {
         const validate = clabe.validate(value);
-        console.log('Información validada', validate);
         if(validate.ok){
             setValidado(validate.tag!);
             setClabe(validate.clabe!);

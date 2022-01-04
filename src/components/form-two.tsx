@@ -44,7 +44,7 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
             setLoading(false);
             handleNext(+1);
         } else {
-            console.log('formcontext is not mounted', formContext)
+            console.log('formcontext is not mounted')
         }
     };
 
