@@ -5,6 +5,7 @@ import { Fade } from 'react-awesome-reveal';
 
 import { FormContext } from 'context/FormContext';
 import { Domicilio } from 'interfaces/domicilio';
+import { addressRegex } from 'utils/regex';
 const { Item } = Form;
 
 
@@ -51,12 +52,16 @@ const FormTwo = ({ handleNext, handleBack }: any) => {
         <Form layout='vertical' autoComplete='false' onFinish={(values) => handleSubmit(values)}>
             <Fade>
                 <div className="form-row">
-                    <Row gutter={12}>
+                    <Row gutter={2}>
                         <Col span={8} xs={24} xl={8}>
                             <Item label="Calle o Avenida" name="calle" rules={[
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
+                                },
+                                {
+                                    pattern: addressRegex,
+                                    message: 'Ingresa una dirección válida'
                                 }
                             ]} hasFeedback>
                                 <Input placeholder='Calle' />

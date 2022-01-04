@@ -1,18 +1,18 @@
-import { useContext, useState, useCallback } from 'react';
+import { useContext, useState } from 'react';
 import { FormContext } from 'context/FormContext';
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 
 import { Fade } from 'react-awesome-reveal';
 import { Input, Form, Row, Col, Button, Tooltip, Space } from 'antd';
+import { addressRegex, curpRegex, phoneRegex, rfcRegex } from 'utils/regex';
 
 const { Item } = Form;
 
 const FormThree = ({ handleBack, handleNext }: any) => {
     const formContext = useContext(FormContext);
     const [loading, setLoading] = useState<boolean>(false);
-    
-    const handleSubmit = useCallback((values) => {
+
+    const handleSubmit = (values:any) => {
         setLoading(true);
         if (formContext) {
             formContext.setForm({
@@ -38,7 +38,7 @@ const FormThree = ({ handleBack, handleNext }: any) => {
             setLoading(false);
             handleNext(+1);
         }
-    },[]);
+    };
 
 
     return (
@@ -77,6 +77,9 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
+                                }, {
+                                    pattern: addressRegex,
+                                    message: 'Ingresa un domicilio válido'
                                 }
                             ]} hasFeedback>
                                 <Input placeholder='Domicilio' />
@@ -86,9 +89,13 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
+                                },
+                                {
+                                    pattern: phoneRegex,
+                                    message: 'Ingresa un teléfono válido'
                                 }
                             ]} hasFeedback>
-                                <Input placeholder='Ingresa el teléfono' />
+                                <Input placeholder='+52 000 000' />
                             </Item>
                         </Col>
                         <Col span={8} xs={24} xl={8}>
@@ -113,9 +120,12 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
+                                }, {
+                                    pattern: curpRegex,
+                                    message: 'Ingresa un CURP válido'
                                 }
                             ]} hasFeedback>
-                                <Input placeholder='México' />
+                                <Input placeholder='CURP' />
                             </Item>
 
                             <Item label="Estado civil" name="estado_civil" rules={[
@@ -150,6 +160,9 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
+                                }, {
+                                    pattern: rfcRegex,
+                                    message: 'Ingresa un RFC válido'
                                 }
                             ]} hasFeedback>
                                 <Input placeholder='Ingresa tu rfc' />
@@ -159,7 +172,11 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                 {
                                     required: true,
                                     message: 'El campo es obligatorio'
-                                }
+                                },
+                                {
+                                    type: 'email',
+                                    message: 'Ingresa un email válido!',
+                                },
                             ]} hasFeedback>
                                 <Input placeholder='user@gmail.com' />
                             </Item>

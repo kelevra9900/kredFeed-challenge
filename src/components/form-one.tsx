@@ -1,8 +1,9 @@
 import { useContext, useState, memo, useCallback } from 'react';
-import { Input, Form, Row, Col, DatePicker, Button, Tooltip, message, Space, Select, Divider } from 'antd';
+import { Input, Form, Row, Col, DatePicker, Button, Tooltip, Space, Select } from 'antd';
 import { Fade } from 'react-awesome-reveal';
 
 import { FormContext } from 'context/FormContext';
+import { rfcRegex } from 'utils/regex';
 const { Item } = Form;
 const { Option } = Select;
 
@@ -10,43 +11,36 @@ const FormOne = ({ handleNext }: any) => {
     const formContext = useContext(FormContext);
     const [regimenFiscal, setRegimeFiscal] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false);
-    const rfcRegex = /^[ña-z]{3,4}[0-9]{6}[0-9a-z]{3}$/i;
 
 
-    const savedForm = useCallback((values) => {
+    const savedForm = (values: any) => {
         setLoading(true);
-        const rfc = values.rfc;
-        if (rfcRegex.test(rfc)) {
-            if (formContext) {
-                formContext.setForm({
-                    razon_social: values.razon_social,
-                    nombre_comercial: values.nombre_comercial,
-                    nacionalidad: values.nacionalidad,
-                    fecha_constitucion: values.fecha_constitucion,
-                    rfc: values.rfc,
-                    regimen_fiscal: regimenFiscal,
-                    industria: values.industria,
-                    correo: values.correo,
-                });
-                setLoading(false);
-                handleNext(+1);
-            }
-        } else {
-            message.warning('Por favor ingresa un RFC válido');
+        if (formContext) {
+            formContext.setForm({
+                razon_social: values.razon_social,
+                nombre_comercial: values.nombre_comercial,
+                nacionalidad: values.nacionalidad,
+                fecha_constitucion: values.fecha_constitucion,
+                rfc: values.rfc,
+                regimen_fiscal: regimenFiscal,
+                industria: values.industria,
+                correo: values.correo,
+            });
             setLoading(false);
+            handleNext(+1);
         }
-    }, [])
+    }
 
 
     const onChange = useCallback((values) => {
         setRegimeFiscal(values);
-    },[])
+    }, [])
 
 
 
     const onSearch = useCallback((values) => {
         console.info(values);
-    },[])
+    }, [])
 
     return (
         <Form layout="vertical" autoComplete='false' onFinish={(values) => savedForm(values)} data-testid="form-one" >
@@ -94,6 +88,9 @@ const FormOne = ({ handleNext }: any) => {
                                     {
                                         required: true,
                                         message: 'El RFC es un campo obligatorio'
+                                    }, {
+                                        pattern: rfcRegex,
+                                        message: 'Por favor ingresa un RFC válido'
                                     }
                                 ]}>
                                 <Input placeholder="Ingresa la razón social" />
@@ -109,7 +106,7 @@ const FormOne = ({ handleNext }: any) => {
                         </Col>
 
                         <Col span={6} xs={24} sm={24} xl={8} md={8}>
-                            <Item label="Régimen fiscal" aria-label="regimen_fiscal" aria-selected="regimen_fiscal" name="regimen_fiscal" rules={[
+                            <Item label="Régimen fiscal" aria-label="regimen_fiscal" aria-selected={true} name="regimen_fiscal" rules={[
                                 {
                                     required: true,
                                     message: 'El régimen fiscal es obligatorio'
@@ -141,7 +138,7 @@ const FormOne = ({ handleNext }: any) => {
                                 {
                                     type: 'email',
                                     message: 'Ingresa un email válido!',
-                                  },
+                                },
                             ]} hasFeedback>
                                 <Input placeholder="Ingresa el correo electrónico" />
                             </Item>
