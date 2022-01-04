@@ -28,6 +28,12 @@ export default function ProfileThree() {
                             <Item label="Teléfono" name="telefono">
                                 <Input placeholder='Teléfono' defaultValue={formData?.form?.representante_legal?.telefono}/>
                             </Item>
+                            <Item label="Estado civil" name="estado_civil">
+                                <Input placeholder='Estado civil' defaultValue={formData?.form?.representante_legal?.estado_civil}/>
+                            </Item>
+                            <Item label="CLABE" name="clabe">
+                                <Input placeholder='CLABE' defaultValue={formData?.form?.representante_legal?.clabe}/>
+                            </Item>
                         </Col>
                         <Col span={8} xs={24} xl={8}>
                             <Item label="Fecha de nacimiento" name="fecha_nacimiento">
@@ -37,8 +43,17 @@ export default function ProfileThree() {
                             <Item label="Entidad federativa" name="entidad_federativa">
                                 <Input placeholder='Entidad federativa' defaultValue={formData?.form?.representante_legal?.entidad_federativa_nacimiento}/>
                             </Item>
-                            <Item label="País" name="pais">
+                            <Item label="País de nacimiento" name="pais">
                                 <Input placeholder='México' defaultValue={formData?.form?.representante_legal?.pais_nacimiento} />
+                            </Item>
+                            <Item label="CURP" name="curp">
+                                <Input placeholder='México' defaultValue={formData?.form?.representante_legal?.curp} />
+                            </Item>
+                            <Item label="Correo" name="correo">
+                                <Input placeholder='usuario@gmail.com' defaultValue={formData?.form?.representante_legal?.correo} />
+                            </Item>
+                            <Item label="Banco" name="banco">
+                                <Input placeholder='Banamex' defaultValue={formData?.form?.representante_legal?.banco} />
                             </Item>
                         </Col>
                         <Col span={8} xs={24} xl={8}>
@@ -50,6 +65,12 @@ export default function ProfileThree() {
                             </Item>
                             <Item label="Ciudad o población" name="ciudad">
                                 <Input placeholder='Ciudad de México' defaultValue={formData?.form?.domicilio?.ciudad}/>
+                            </Item>
+                            <Item label="RFC" name="rfc">
+                                <Input placeholder='RFC' defaultValue={formData?.form?.representante_legal?.rfc}/>
+                            </Item>
+                            <Item label="Teléfono" name="telefono">
+                                <Input placeholder='+52 000000' defaultValue={formData?.form?.representante_legal?.telefono}/>
                             </Item>
                         </Col>
                     </Row>

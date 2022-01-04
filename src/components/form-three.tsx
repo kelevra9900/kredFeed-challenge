@@ -3,7 +3,9 @@ import { FormContext } from 'context/FormContext';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 
 import { Fade } from 'react-awesome-reveal';
-import { Input, Form, Row, Col, Button, Tooltip, Space } from 'antd';
+import { Input, Form, Row, Col, Button, Tooltip, Space, DatePicker, Alert } from 'antd';
+import { clabe } from 'clabe-validator';
+
 import { addressRegex, curpRegex, phoneRegex, rfcRegex } from 'utils/regex';
 
 const { Item } = Form;
@@ -11,6 +13,9 @@ const { Item } = Form;
 const FormThree = ({ handleBack, handleNext }: any) => {
     const formContext = useContext(FormContext);
     const [loading, setLoading] = useState<boolean>(false);
+    const [ error, setError ] = useState<boolean>(false);
+    const [ validado, setValidado ] = useState("");
+    const [ clabeData, setClabe] = useState("");
 
     const handleSubmit = (values:any) => {
         setLoading(true);
@@ -28,8 +33,8 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                     rfc: values.rfc,
                     domicilio: values.domicilio,
                     doc_id: values.doc_id,
-                    clabe: values.clabe,
-                    banco: values.banco,
+                    clabe: clabeData,
+                    banco: validado,
                     estado_civil: values.estado_civil,
                     correo: values.correo,
                     telefono: values.telefono
@@ -40,12 +45,25 @@ const FormThree = ({ handleBack, handleNext }: any) => {
         }
     };
 
+    const validateCLABE = (value:string) => {
+        const validate = clabe.validate(value);
+        console.log('Información validada', validate);
+        if(validate.ok){
+            setValidado(validate.tag!);
+            setClabe(validate.clabe!);
+            setError(false);
+        }else{
+            setError(true)
+            setValidado("")
+        }
+    }
+
 
     return (
         <Form layout='vertical' autoComplete='false' onFinish={(values) => handleSubmit(values)}>
             <Fade>
                 <div className="form-row">
-                    <Row gutter={12}>
+                    <Row gutter={2}>
                         <Col span={8} xs={24} xl={8}>
                             <Item label="Nombre" name="nombre" rules={[
                                 {
@@ -105,7 +123,7 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                     message: 'El campo es obligatorio'
                                 }
                             ]} hasFeedback>
-                                <Input placeholder='Fecha de nacimiento' />
+                                <DatePicker placeholder='Fecha de nacimiento' style={{ width: '100%' }} />
                             </Item>
                             <Item label="Entidad federativa" name="entidad_federativa" rules={[
                                 {
@@ -137,13 +155,10 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                                 <Input placeholder='Ingresa el estado civil' />
                             </Item>
 
-                            <Item label="CLABE" name="clabe" rules={[
-                                {
-                                    required: true,
-                                    message: 'El campo es obligatorio'
-                                }
-                            ]} hasFeedback>
-                                <Input placeholder='CLABE' />
+                            <Item label="CLABE" name="clabe" tooltip="La clabe debe de tener 18 dígitos">
+                                <Input placeholder='CLABE' maxLength={18} onChange={(e) => validateCLABE(e.target.value)} />
+                                { error ? <Alert message="La CLABE es inválida" type="error" /> : ''}
+                                { validado !== '' ? <Alert type='success' message={validado} /> : '' }
                             </Item>
                         </Col>
                         <Col span={8} xs={24} xl={8}>
@@ -180,13 +195,8 @@ const FormThree = ({ handleBack, handleNext }: any) => {
                             ]} hasFeedback>
                                 <Input placeholder='user@gmail.com' />
                             </Item>
-                            <Item label="Banco" name="banco" rules={[
-                                {
-                                    required: true,
-                                    message: 'El campo es obligatorio'
-                                }
-                            ]} hasFeedback>
-                                <Input placeholder='Banco' />
+                            <Item label="Banco" name="banco">
+                                <Input placeholder={validado} disabled={true} />
                             </Item>
                         </Col>
 

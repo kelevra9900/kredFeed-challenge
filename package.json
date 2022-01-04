@@ -9,6 +9,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.3.4",
+    "clabe-validator": "^1.7.3",
     "lottie-react": "^2.1.0",
     "moment": "^2.29.1",
     "momment": "0.0.1",
